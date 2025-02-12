@@ -4,9 +4,9 @@ This repository contains GitHub actions and reusable workflows used for automati
 
 ## Project structure
 
-### `workflows` folder
+### `.github/workflows` folder
 
-The `workflows` folder contains the reusable Github workflows. They're easily identified by the `_shared-*` identifier.
+The `.github/workflows` folder contains the reusable Github workflows. They're easily identified by the `_shared-*` identifier.
 
 ### `samples` folder
 

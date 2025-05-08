@@ -10,6 +10,6 @@ on:
 
 jobs:
   call-workflow-in-public-repo:
-    uses: eurotech/add-ons-automation/.github/workflows/_shared-release-notes.yml@main
+    uses: eclipse-kura/.github/.github/workflows/_shared-release-notes.yml@main
     with:
       starting_commit: ${{ inputs.starting_commit }}

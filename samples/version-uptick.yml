@@ -1,0 +1,20 @@
+name: "Version uptick automation"
+
+on:
+  workflow_dispatch:
+    inputs:
+        uptick_config:
+          type: choice
+          description: Configuration to use for the uptick
+          options:
+            - uptick_major_on_develop_branch.yml
+            - uptick_minor_on_develop_branch.yml
+            - uptick_patch_on_maintenance_branch.yml
+            - uptick_snapshot_to_release.yml
+          required: true
+
+jobs:
+  call-workflow-in-public-repo:
+    uses: eurotech/add-ons-automation/.github/workflows/_shared-version-uptick.yml@main
+    with:
+      uptick_config: ${{ inputs.uptick_config }}

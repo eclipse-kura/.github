@@ -25,6 +25,7 @@ jobs:
     name: Generate SBOM
     runs-on: ubuntu-22.04
     outputs:
+      project-name: ${{ steps.get-name.outputs.project-name }}
       project-version: ${{ steps.version.outputs.PROJECT_VERSION }}
     permissions:
       packages: read
@@ -132,8 +133,8 @@ jobs:
 #     needs: ['generate-sbom']
 #     uses: eclipse-csi/workflows/.github/workflows/store-sbom-data.yml@main
 #     with:
-#       projectName: ${{ inputs.project-name }}
+#       projectName: ${{ needs.generate-sbom.outputs.project-name }}
 #       projectVersion: ${{ needs.generate-sbom.outputs.project-version }}
-#       bomArtifact: "${{ inputs.project-name }}-sbom"
+#       bomArtifact: "${{ needs.generate-sbom.outputs.project-name }}-sbom"
 #       bomFilename: 'bom.json'
 #       parentProject: ${{ inputs.dependency-track-id }}

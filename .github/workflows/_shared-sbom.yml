@@ -3,9 +3,6 @@ name: Kura networking SBOM upload
 on:
   workflow_call:
     inputs:
-      project-name: # FIXME: Do we really need this?
-        required: true
-        type: string
       dependency-track-id:
         required: true
         type: string
@@ -78,6 +75,17 @@ jobs:
           )\" >> \"${GITHUB_OUTPUT}\""
         shell: bash
 
+      - name: Get project name
+        id: get-name
+        run: "echo \"project-name=\
+          $(mvn
+            --file ./pom.xml
+            -Dexec.executable=echo
+            -Dexec.args='${project.artifactId}'
+            --quiet exec:exec --non-recursive
+          )\" >> \"${GITHUB_OUTPUT}\""
+        shell: bash
+
       - name: Setup Node SDK
         uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         with:
@@ -114,11 +122,11 @@ jobs:
           echo "PROJECT_VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "Product version: $VERSION"
 
-      # - name: Upload sbom
-      #   uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
-      #   with:
-      #     name: "${{ inputs.project-name }}-sbom"
-      #     path: ./bom.json
+      - name: Upload sbom
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        with:
+          name: "${{ steps.get-name.outputs.project-name }}-sbom"
+          path: ./bom.json
 
 #   store-sbom-data:
 #     needs: ['generate-sbom']

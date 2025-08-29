@@ -1,4 +1,4 @@
-name: Kura networking SBOM upload
+name: "Kura SBOM upload (shared)"
 
 on:
   workflow_call:

@@ -18,6 +18,7 @@ Eclipse Kura™ runs on an edge gateway, which can be anything from a small SBC(
 - [kura-artemis](https://github.com/eclipse-kura/kura-artemis): Eclipse Kura™ Artemis MQTT server addon
 - [kura-bluetooth](https://github.com/eclipse-kura/kura-bluetooth): Eclipse Kura™ Bluetooth addon
 - [kura-command](https://github.com/eclipse-kura/kura-command): Eclipse Kura™ Command addon
+- [kura-gpio](https://github.com/eclipse-kura/kura-gpio): Eclipse Kura™ GPIO handling addon
 - [kura-management-ui](https://github.com/eclipse-kura/kura-management-ui): Eclipse Kura™ Web UI addon
 - [kura-metapackage](https://github.com/eclipse-kura/kura-metapackage): Eclipse Kura™ Metapackage
 - [kura-networking](https://github.com/eclipse-kura/kura-networking): Eclipse Kura™ Networking addon

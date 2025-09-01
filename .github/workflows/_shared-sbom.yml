@@ -69,21 +69,8 @@ jobs:
         id: info
         shell: bash
         run: |
-          echo "resolved-version=\
-          $(mvn
-            --file ./pom.xml
-            -Dexec.executable=echo
-            -Dexec.args='${project.version}'
-            --quiet exec:exec --non-recursive
-          )" >> ${GITHUB_OUTPUT}
-
-          echo "project-name=\
-          $(mvn
-            --file ./pom.xml
-            -Dexec.executable=echo
-            -Dexec.args='${project.artifactId}'
-            --quiet exec:exec --non-recursive
-          )" >> ${GITHUB_OUTPUT}
+          echo "resolved-version=$(mvn --file ./pom.xml -Dexec.executable=echo -Dexec.args='${project.version}' --quiet exec:exec --non-recursive)" >> ${GITHUB_OUTPUT}
+          echo "project-name=$(mvn --file ./pom.xml -Dexec.executable=echo -Dexec.args='${project.artifactId}' --quiet exec:exec --non-recursive)" >> ${GITHUB_OUTPUT}
 
       - name: Setup Node SDK
         uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0

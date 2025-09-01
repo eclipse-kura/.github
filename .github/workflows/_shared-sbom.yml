@@ -90,9 +90,9 @@ jobs:
           echo "project_version=$version" >> $GITHUB_OUTPUT
 
           echo "=== Debug Project Information ==="
-          echo "Project name: $project_name"
-          echo "Resolved version: $resolved_version"
-          echo "Project version: $project_version"
+          echo "Project name: ${{ steps.info.outputs.project_name }}"
+          echo "Project version: ${{ steps.info.outputs.project_version }}"
+          echo "Resolved version: ${{ steps.info.outputs.resolved_version }}"
           echo "==============================="
 
       - name: Setup Node SDK

@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-22.04
     outputs:
       project-name: ${{ steps.info.outputs.project-name }}
-      project-version: ${{ steps.version.outputs.PROJECT_VERSION }}
+      project-version: ${{ steps.info.outputs.project_version }}
     permissions:
       packages: read
     steps:
@@ -85,6 +85,16 @@ jobs:
               --non-recursive\
           )" >> ${GITHUB_OUTPUT}
 
+          # Substitute "-SNAPSHOT" suffix with "@dev" if present
+          version="${resolved-version/-SNAPSHOT/@dev}"
+          echo "project_version=$version" >> $GITHUB_OUTPUT
+
+          echo "=== Debug Project Information ==="
+          echo "Project name: $project-name"
+          echo "Resolved version: $resolved-version"
+          echo "Project version: $project-version"
+          echo "==============================="
+
       - name: Setup Node SDK
         uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         with:
@@ -108,18 +118,6 @@ jobs:
             --filter "kura" \
             --project-version "${{ steps.info.outputs.resolved-version }}" \
             --deep
-
-      - name: Extract product version
-        id: version
-        shell: bash
-        run: |
-          VERSION="$(jq -r '.metadata.component.version' < ./bom.json)"
-
-          # Substitute "-SNAPSHOT" suffix with "@dev" if present
-          VERSION="${VERSION/-SNAPSHOT/@dev}"
-
-          echo "PROJECT_VERSION=$VERSION" >> $GITHUB_OUTPUT
-          echo "Product version: $VERSION"
 
       - name: Upload sbom
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0

@@ -69,32 +69,34 @@ jobs:
         id: info
         shell: bash
         run: |
-          echo "resolved_version=$(\
-            mvn --file ./pom.xml \
-              -Dexec.executable=echo \
-              -Dexec.args='${project.version}' \
-              --quiet exec:exec \
-              --non-recursive\
-          )" >> ${GITHUB_OUTPUT}
-
-          echo "project_name=$(\
+          project_name=$(\
             mvn --file ./pom.xml \
               -Dexec.executable=echo \
               -Dexec.args='${project.artifactId}' \
               --quiet exec:exec \
               --non-recursive\
-          )" >> ${GITHUB_OUTPUT}
+          )
+
+          resolved_version=$(\
+            mvn --file ./pom.xml \
+              -Dexec.executable=echo \
+              -Dexec.args='${project.version}' \
+              --quiet exec:exec \
+              --non-recursive\
+          )
 
           # Substitute "-SNAPSHOT" suffix with "@dev" if present
           version="${resolved_version/-SNAPSHOT/@dev}"
+
+          # Set the output values
+          echo "project_name=$project_name" >> $GITHUB_OUTPUT
+          echo "resolved_version=$resolved_version" >> $GITHUB_OUTPUT
           echo "project_version=$version" >> $GITHUB_OUTPUT
 
-      - name: Debug project information
-        run: |
           echo "=== Debug Project Information ==="
-          echo "Project name: ${{ steps.info.outputs.project_name }}"
-          echo "Project version: ${{ steps.info.outputs.project_version }}"
-          echo "Resolved version: ${{ steps.info.outputs.resolved_version }}"
+          echo "Project name: $project_name"
+          echo "Resolved version: $resolved_version"
+          echo "Project version: $version"
           echo "==============================="
 
       - name: Setup Node SDK

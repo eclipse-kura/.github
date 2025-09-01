@@ -89,6 +89,8 @@ jobs:
           version="${resolved_version/-SNAPSHOT/@dev}"
           echo "project_version=$version" >> $GITHUB_OUTPUT
 
+      - name: Debug project information
+        run: |
           echo "=== Debug Project Information ==="
           echo "Project name: ${{ steps.info.outputs.project_name }}"
           echo "Project version: ${{ steps.info.outputs.project_version }}"

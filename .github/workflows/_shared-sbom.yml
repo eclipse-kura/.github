@@ -74,7 +74,7 @@ jobs:
               -Dexec.executable=echo \
               -Dexec.args='${project.artifactId}' \
               --quiet exec:exec \
-              --non-recursive\
+              --non-recursive \
           )
 
           resolved_version=$(\
@@ -82,7 +82,7 @@ jobs:
               -Dexec.executable=echo \
               -Dexec.args='${project.version}' \
               --quiet exec:exec \
-              --non-recursive\
+              --non-recursive \
           )
 
           # Substitute "-SNAPSHOT" suffix with "@dev" if present

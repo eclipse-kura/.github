@@ -24,5 +24,5 @@ jobs:
     uses: eclipse-kura/.github/.github/workflows/_shared-sbom.yml@main
     with:
       # The parent project UUID the uploaded SBOM should be associated with.
-      # Refer to https://sbom.eclipse.org/ to retrive the UUID.
+      # Refer to https://sbom.eclipse.org/ to retrieve the UUID.
       dependency-track-id: '<UUID>'

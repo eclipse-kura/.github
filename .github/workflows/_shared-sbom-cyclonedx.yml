@@ -100,12 +100,12 @@ jobs:
           name: "${{ steps.info.outputs.project_name }}-sbom"
           path: "./${{ steps.info.outputs.project_name }}-bom/bom.json"
 
-  store-sbom-data:
-    needs: ['generate-sbom']
-    uses: eclipse-csi/workflows/.github/workflows/store-sbom-data.yml@main
-    with:
-      projectName: ${{ needs.generate-sbom.outputs.project-name }}
-      projectVersion: ${{ needs.generate-sbom.outputs.project-version }}
-      bomArtifact: "${{ needs.generate-sbom.outputs.project-name }}-sbom"
-      bomFilename: 'bom.json'
-      parentProject: ${{ inputs.dependency-track-id }}
+#   store-sbom-data:
+#     needs: ['generate-sbom']
+#     uses: eclipse-csi/workflows/.github/workflows/store-sbom-data.yml@main
+#     with:
+#       projectName: ${{ needs.generate-sbom.outputs.project-name }}
+#       projectVersion: ${{ needs.generate-sbom.outputs.project-version }}
+#       bomArtifact: "${{ needs.generate-sbom.outputs.project-name }}-sbom"
+#       bomFilename: 'bom.json'
+#       parentProject: ${{ inputs.dependency-track-id }}

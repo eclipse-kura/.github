@@ -10,7 +10,7 @@ on:
 env:
   JAVA_VERSION: '17' # java version used by the product
   JAVA_DISTRO: 'temurin' # java distro used by the product
-  PLUGIN_VERSION: '2.7.8' # cyclonedx-maven-plugin version to use
+  PLUGIN_VERSION: '2.9.1' # cyclonedx-maven-plugin version to use
   SBOM_TYPE: 'makeBom' # cyclonedx plugin goal
   WORKFLOW_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
   INPUT_TARGET_BRANCH: ${{ github.event.inputs.target_branch }}

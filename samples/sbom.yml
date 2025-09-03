@@ -21,7 +21,12 @@ permissions:
 
 jobs:
   call-workflow-in-public-repo:
-    uses: eclipse-kura/.github/.github/workflows/_shared-sbom-cdxgen.yml@main
+    # For repositories using the BOM POM use cyclonedx-based SBOM generation workflow
+    # Note: the workflow expects the BOM POM to be stored in a folder named "<project-name>-bom"
+    uses: eclipse-kura/.github/.github/workflows/_shared-sbom-cyclonedx.yml@main
+    # For repositories still using the `lib/` folders to store their external dependencies
+    # use the cdxgen-based SBOM generation workflow
+    # uses: eclipse-kura/.github/.github/workflows/_shared-sbom-cdxgen.yml@main
     with:
       # The parent project UUID the uploaded SBOM should be associated with.
       # Refer to https://sbom.eclipse.org/ to retrieve the UUID.

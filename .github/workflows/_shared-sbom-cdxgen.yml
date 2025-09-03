@@ -1,4 +1,4 @@
-name: "Kura SBOM upload (shared)"
+name: "Kura SBOM scan via cdxgen (shared)"
 
 on:
   workflow_call:
@@ -6,9 +6,6 @@ on:
       dependency-track-id:
         required: true
         type: string
-
-permissions:
-  contents: read
 
 env:
   JAVA_VERSION: '17' # java version used by the product
@@ -27,8 +24,6 @@ jobs:
     outputs:
       project-name: ${{ steps.info.outputs.project_name }}
       project-version: ${{ steps.info.outputs.project_version }}
-    permissions:
-      packages: read
     steps:
       - name: Set checkout ref
         id: set-checkout-ref

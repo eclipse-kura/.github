@@ -1,4 +1,4 @@
-name: "Kura SBOM upload (shared)"
+name: "Kura SBOM scan via cdxgen (shared)"
 
 on:
   workflow_call:

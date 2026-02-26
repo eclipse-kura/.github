@@ -92,7 +92,7 @@ jobs:
 
       - name: Generate sbom
         run: |
-          mvn org.cyclonedx:cyclonedx-maven-plugin:$PLUGIN_VERSION:$SBOM_TYPE -DprojectType=framework -DskipNotDeployed=false
+          mvn org.cyclonedx:cyclonedx-maven-plugin:$PLUGIN_VERSION:$SBOM_TYPE -DprojectType=framework -Dcyclonedx.skipNotDeployed=false
 
       - name: Upload sbom
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0

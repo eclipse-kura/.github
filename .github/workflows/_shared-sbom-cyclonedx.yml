@@ -11,7 +11,7 @@ env:
   JAVA_VERSION: '17' # java version used by the product
   JAVA_DISTRO: 'temurin' # java distro used by the product
   PLUGIN_VERSION: '2.9.1' # cyclonedx-maven-plugin version to use
-  SBOM_TYPE: 'makeBom' # cyclonedx plugin goal
+  SBOM_TYPE: 'makeAggregateBom' # cyclonedx plugin goal
   WORKFLOW_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
   INPUT_TARGET_BRANCH: ${{ github.event.inputs.target_branch }}
   EVENT_NAME: ${{ github.event_name }}
@@ -92,13 +92,17 @@ jobs:
 
       - name: Generate sbom
         run: |
-          mvn org.cyclonedx:cyclonedx-maven-plugin:$PLUGIN_VERSION:$SBOM_TYPE -f "${{ steps.info.outputs.project_name }}-bom/pom.xml" -DprojectType=framework
+          mvn org.cyclonedx:cyclonedx-maven-plugin:$PLUGIN_VERSION:$SBOM_TYPE \
+            -DexcludeTypes=eclipse-target-definition \
+            -DexcludeTestProject=true \
+            -DprojectType=library \
+            -Dcyclonedx.skipNotDeployed=false
 
       - name: Upload sbom
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: "${{ steps.info.outputs.project_name }}-sbom"
-          path: "./${{ steps.info.outputs.project_name }}-bom/target/bom.json"
+          path: "./target/bom.json"
 
   store-sbom-data:
     needs: ['generate-sbom']

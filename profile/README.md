@@ -27,3 +27,10 @@ Eclipse Kura™ runs on an edge gateway, which can be anything from a small SBC(
 - [kura-position](https://github.com/eclipse-kura/kura-position): Eclipse Kura™ Position addon
 - [kura-triton](https://github.com/eclipse-kura/kura-triton): Eclipse Kura™ for Nvidia Triton™ addon
 - [kura-wires](https://github.com/eclipse-kura/kura-wires): Eclipse Kura™ Wires and Assets addon
+
+Contact
+
+We welcome questions, feedback, and contributions from the community around Eclipse Kura.
+
+- 💬 Public discussions: Please start a conversation or ask your questions in our GitHub Discussions section so the whole community can benefit from the exchange.
+- 📧 Private inquiries: For confidential or business-related matters, feel free to contact us directly at [kura-dev@eurotech.com](mailto:kura-dev@eurotech.com)

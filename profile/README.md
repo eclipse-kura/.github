@@ -33,4 +33,4 @@ Eclipse Kura™ runs on an edge gateway, which can be anything from a small SBC(
 We welcome questions, feedback, and contributions from the community around Eclipse Kura.
 
 - 💬 **Public discussions**: Please start a conversation or ask your questions in our [GitHub Discussions](https://github.com/eclipse-kura/kura/discussions) section so the whole community can benefit from the exchange.
-- 📧 **Private inquiries**: For confidential or business-related matters, feel free to contact us directly at [kura-dev@eurotech.com](mailto:kura-dev@eurotech.com)
+- 📧 **Direct email**: For confidential, sensitive, or business-related inquiries, you can reach us directly at [kura-dev@eurotech.com](mailto:kura-dev@eurotech.com)

@@ -2,11 +2,6 @@ name: "Lint PR (shared)"
 
 on: workflow_call
 
-permissions:
-  contents: read
-  pull-requests: read  # for amannn/action-semantic-pull-request to analyze PRs
-  statuses: write  # for amannn/action-semantic-pull-request to mark status of analyzed PR
-
 jobs:
   main:
     name: Validate PR title

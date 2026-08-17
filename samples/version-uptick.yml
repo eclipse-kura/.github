@@ -19,4 +19,4 @@ jobs:
     with:
       uptick_config: ${{ inputs.uptick_config }}
     secrets:
-      secrets.personal_access_token: ${{ secrets.BOT_GITHUB_TOKEN }}
+      personal_access_token: ${{ secrets.BOT_GITHUB_TOKEN }}

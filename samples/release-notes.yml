@@ -14,4 +14,4 @@ jobs:
     with:
       starting_commit: ${{ inputs.starting_commit }}
     secrets:
-      secrets.personal_access_token: ${{ secrets.BOT_GITHUB_TOKEN }}
+      personal_access_token: ${{ secrets.BOT_GITHUB_TOKEN }}

@@ -41,6 +41,10 @@ jobs:
               repo: context.repo.repo
             })
 
+            // Comment bodies that count as a vote
+            const voteCommands = ['/force-merge', '/yolo'];
+            const isVote = body => body && voteCommands.includes(body.trim());
+
             // Check if debug mode is enabled by any comment containing "/debug-force-merge"
             const debugEnabled = comments.data.some(comment =>
               comment.body && comment.body.includes('/debug-force-merge')
@@ -53,7 +57,7 @@ jobs:
                 console.log(`User: ${comment.user.login}`);
                 console.log(`Association: ${comment.author_association}`);
                 console.log(`Has voting rights: ${comment.author_association === 'MEMBER' || comment.author_association === 'OWNER'}`);
-                console.log(`Has casted vote: ${comment.body && comment.body.trim() === '/force-merge'}`);
+                console.log(`Has casted vote: ${isVote(comment.body)}`);
                 console.log("---");
               }
             }
@@ -61,7 +65,7 @@ jobs:
             const votes = new Map();
             for(const comment of comments.data) {
               const hasVotingRights = comment.author_association === 'MEMBER' || comment.author_association === 'OWNER'
-              const hasCastedVote = comment.body && comment.body.trim() === '/force-merge'
+              const hasCastedVote = isVote(comment.body)
 
               if(hasVotingRights && hasCastedVote) {
                 votes.set(comment.user.login, comment.author_association);

@@ -1,0 +1,51 @@
+name: "Integration tests dependencies update (shared)"
+
+on:
+  workflow_call:
+    inputs:
+        java_version:
+          type: string
+          required: false
+          default: '21'
+    secrets:
+        personal_access_token:
+          required: true
+
+jobs:
+  resolve-integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+    - name: Setup Java SDK
+      uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
+      with:
+        java-version: ${{ inputs.java_version }}
+        distribution: 'temurin'
+        cache: 'maven'
+
+    - name: Resolve integration tests dependencies
+      run: |
+        mvn clean install -Presolve-integration-tests -DskipTests
+      shell: bash
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@38e0b6e68b4c852a5500a94740f0e535e0d7ba54 # v4.2.4
+      with:
+        title: "test: update integration test dependencies"
+        commit-message: "test: update integration test dependencies"
+        body: |
+          Automated changes by [_Integration tests dependencies update_](https://github.com/eclipse-kura/.github/blob/main/.github/workflows/_shared-integration-tests-resolve.yml) action.
+
+          This PR is the result of running:
+
+          ```bash
+          mvn clean install -Presolve-integration-tests -DskipTests
+          ```
+        add-paths: |
+          **/*.bndrun
+        branch: automation/update-integration-tests-dependencies
+        branch-suffix: timestamp
+        token: ${{ secrets.personal_access_token }}

@@ -24,7 +24,6 @@ jobs:
       with:
         java-version: ${{ inputs.java_version }}
         distribution: 'temurin'
-        cache: 'maven'
 
     - name: Resolve integration tests dependencies
       run: |
